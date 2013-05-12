@@ -20,6 +20,8 @@ function UserauthRegisterDo($arg){
   }else{
     $UserInfoObj->AddUser($arg['uname']);
     $UserInfoObj->SetUserPassword($arg['uname'],$arg['pass']);
+    $abilities_arr = preg_split('/[\s,]+/', "@writers");
+    $UserInfoObj->SetUserAbilities($arg['uname'], $abilities_arr);
     $UserInfoObj->PublishChanges();
     return true;
   }
